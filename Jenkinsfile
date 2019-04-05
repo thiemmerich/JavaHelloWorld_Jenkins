@@ -13,13 +13,13 @@ pipeline {
         stage('Docker Compile Class') {
             agent any
             steps {
-                sh 'cd JavaHelloWorld_Jenkins-dev && docker run --rm -v $PWD:/app -w /app demo/oracle-java:8 javac ./src/helloworld/HelloWorld.java'
+                sh 'cd src/helloworld && docker run --rm -v $PWD:/app -w /app demo/oracle-java:8 javac HelloWorld.java'
             }
         }    
         stage('Docker Execute Java Class') {
             agent any
             steps {
-                sh 'cd JavaHelloWorld_Jenkins-dev && docker run --rm -v $PWD:/app -w /app demo/oracle-java:8 javac ./src/helloworld/HelloWorld.java && docker run --rm -v $PWD:/app -w /app demo/oracle-java:8 java Main'
+                sh 'cd src/helloworld && docker run --rm -v $PWD:/app -w /app demo/oracle-java:8 javac HelloWorld.java && docker run --rm -v $PWD:/app -w /app demo/oracle-java:8 java Main'
             }
         }        
     }
